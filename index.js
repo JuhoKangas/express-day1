@@ -20,6 +20,21 @@ app.get('/todos/:id', (req, res) => {
     res.json(todo)
 })
 
+app.post('/todos', (req, res) => {
+    const newTodoText = req.body.text
+    const todo = {
+        id: Date.now(),
+        text: newTodoText,
+        completed: false
+    }
+    todoData.push(todo)
+    res.json(todo)
+})
+
+// curl -X POST http://localhost:3000/todos \
+//   -H "Content-Type: application/json" \
+//   -d '{"text":"My new todo"}'
+
 app.listen(port, () => {
     console.log(`Server running now in port ${port}!!!`)
 })
