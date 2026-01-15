@@ -54,6 +54,13 @@ app.patch('/todos/:id', (req, res) => {
     res.json({ message: "Todo updated successfully"})
 })
 
+app.delete('/todos/:id', (req, res) => {
+    const todoId = Number(req.params.id)
+
+    todoData = todoData.filter((todo) => todo.id !== todoId)
+    res.json({message: "Todo deleted successfully"})
+})
+
 app.listen(port, () => {
     console.log(`Server running now in port ${port}!!!`)
 })
