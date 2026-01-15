@@ -1,1 +1,7 @@
-console.log('Hello, Express!');
+import express from 'express'
+const app = express()
+const port = 3000
+
+app.listen(port, () => {
+    console.log(`Server running now in port ${port}!!!`)
+})
