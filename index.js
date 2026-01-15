@@ -14,6 +14,12 @@ app.get('/todos', (req, res) => {
     res.json(todoData)
 })
 
+app.get('/todos/:id', (req, res) => {
+    const todoId = Number(req.params.id)
+    const todo = todoData.find(t => t.id === todoId)
+    res.json(todo)
+})
+
 app.listen(port, () => {
     console.log(`Server running now in port ${port}!!!`)
 })
