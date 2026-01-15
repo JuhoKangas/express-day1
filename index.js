@@ -57,10 +57,18 @@ app.patch('/todos/:id', (req, res) => {
 })
 
 app.delete('/todos/:id', (req, res) => {
+    try {
     const todoId = Number(req.params.id)
+
+    if (!todoData.find(t => t.id === todoId)) {
+        throw new Error("Todo not found")
+    }
 
     todoData = todoData.filter((todo) => todo.id !== todoId)
     res.json({message: "Todo deleted successfully"})
+    } catch (error) {
+        res.status(404).json({errorMessage: error.message})
+    } 
 })
 
 app.listen(port, () => {
