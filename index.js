@@ -1,10 +1,26 @@
 import express from 'express'
 import cors from 'cors'
+import usersRouter from './routes/users.routes.js'
 const app = express()
 const port = 3000
 
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
+
+function logger(req, res, next) {
+    console.log(`${req.method} ${req.url}`)
+    next()
+}
+
+function sayHi(req, res, next) {
+    console.log("Hi from middleware")
+    req.helloMessage = "This is the hellomessage"
+    next()
+}
+
+app.use(logger)
+
+app.use('/users', usersRouter)
 
 let todoData = [
     {id: 1, text: "First todo", completed: false },
@@ -16,9 +32,10 @@ app.get('/todos', (req, res) => {
     res.json(todoData)
 })
 
-app.get('/todos/:id', (req, res) => {
+app.get('/todos/:id', sayHi, (req, res) => {
     const todoId = Number(req.params.id)
     const todo = todoData.find(t => t.id === todoId)
+    console.log(req.helloMessage)
     res.json(todo)
 })
 
@@ -68,7 +85,7 @@ app.delete('/todos/:id', (req, res) => {
     res.json({message: "Todo deleted successfully"})
     } catch (error) {
         res.status(404).json({errorMessage: error.message})
-    } 
+    }
 })
 
 app.listen(port, () => {
