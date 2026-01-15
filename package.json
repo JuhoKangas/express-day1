@@ -1,0 +1,25 @@
+{
+  "name": "express-day1",
+  "version": "1.0.0",
+  "description": "This is the follow-along repo for the Web Dev Express Backend day 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuhoKangas/express-day1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/JuhoKangas/express-day1/issues"
+  },
+  "homepage": "https://github.com/JuhoKangas/express-day1#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
