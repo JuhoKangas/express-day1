@@ -2,8 +2,16 @@ import express from 'express'
 const app = express()
 const port = 3000
 
+app.use(express.json())
+
+let todoData = [
+    {id: 1, text: "First todo", completed: false },
+    {id: 2, text: "Learn express", completed: false},
+    {id: 3, text: "Make millions", completed: true}
+]
+
 app.get('/todos', (req, res) => {
-    res.send('Hello from the server!')
+    res.json(todoData)
 })
 
 app.listen(port, () => {
