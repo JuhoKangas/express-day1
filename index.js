@@ -1,8 +1,12 @@
 import express from 'express'
 import cors from 'cors'
+import pool from './db.js'
+import dotenv from 'dotenv'
 import usersRouter from './routes/users.routes.js'
 const app = express()
 const port = 3000
+
+dotenv.config()
 
 app.use(cors())
 app.use(express.json())
@@ -28,8 +32,14 @@ let todoData = [
     {id: 3, text: "Make millions", completed: true}
 ]
 
-app.get('/todos', (req, res) => {
-    res.json(todoData)
+app.get('/todos', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM todos ORDER BY id ASC')
+        
+        res.json(result.rows)
+    } catch (error) {
+        console.log("Error fetching todos:", error)
+    }
 })
 
 app.get('/todos/:id', sayHi, (req, res) => {
