@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS todos (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO todos (id, text, completed) VALUES
-    (1, 'Buy groceries', true),
-    (2, 'go to the gym', false),
-    (3, 'Buy milk', true),
-    (4, 'watch movies', false);
+INSERT INTO todos (text, completed) VALUES
+    ('Buy groceries', true),
+    ('go to the gym', false),
+    ('Buy milk', true),
+    ('watch movies', false);

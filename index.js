@@ -49,15 +49,16 @@ app.get('/todos/:id', sayHi, (req, res) => {
     res.json(todo)
 })
 
-app.post('/todos', (req, res) => {
+app.post('/todos', async (req, res) => {
+    try {
     const newTodoText = req.body.text
-    const todo = {
-        id: Date.now(),
-        text: newTodoText,
-        completed: false
+    const result = await pool.query(
+        'INSERT INTO todos (text, completed) VALUES ($1, $2) RETURNING *', [newTodoText, false]
+    )
+    res.status(201).json(result.rows[0])
+    } catch (error) {
+        console.log("error creating a todo", error)
     }
-    todoData.push(todo)
-    res.status(201).json(todo)
 })
 
 // curl -X POST http://localhost:3000/todos \
